@@ -32,16 +32,15 @@ echo "Installed nodejs"
 
 id roboshop  &>>$LOG_FILE
 if [ $? -ne 0 ]; then
-     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
+     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop  &>>$LOG_FILE
 else
     echo -e "User already exists ...$Y SKIPPING $N"
 fi
-
 mkdir -p /app 
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$LOG_FILE
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip  &>>$LOG_FILE
 cd /app 
 rm -rf /app/*
-unzip /tmp/catalogue.zip &>>$LOG_FILE
+unzip /tmp/catalogue.zip  &>>$LOG_FILE
 echo "Succesfully created directory and dowloaded the code"
 
 npm install &>>$LOG_FILE
