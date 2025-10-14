@@ -5,11 +5,9 @@ TO_ADDRESS=$1
 SUBJECT=$2
 ALERT_TYPE=$3
 MESSAGE_BODY=$4
+FORMATTED_BODY=$(printf '%s\n' "$MESSAGE_BODY" | sed -e 's/[]\/$*.^[]/\\&/g')  # Format message body for HTML
 IP_ADDRESS=$5
 TO_TEAM=$6
-
-# Format message body for HTML
-FORMATTED_BODY=$(printf '%s\n' "$MESSAGE_BODY" | sed -e 's/[]\/$*.^[]/\\&/g')
 
 # Prepare final HTML email body from template
 FINAL_BODY=$(sed -e "s/TO_TEAM/$TO_TEAM/g" \
