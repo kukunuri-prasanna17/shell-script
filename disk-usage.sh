@@ -1,7 +1,7 @@
 #!/bin/bash
 DISK_THRESHOLD=2
 DISK_USAGE=$(df -hT | grep -v Filesystem)
-IP_ADDRESS=${curl -s http://169.254.169.254/latest/meta-data/public-ipv4}
+IP_ADDRESS=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 MESSAGE=""
 
 while IFS= read -r line
@@ -17,4 +17,4 @@ done <<< "$DISK_USAGE"
 echo -e "Message body: $MESSAGE"
 
 # Call the email script
-sh gmail.sh "prasannakukunuri35@gmail.com" "High Usage Alert On Disk Storage" "Disk Usage" "$MESSAGE" "${IP_ADDRESS}" "DevOps Team"
+sh gmail.sh "prasannakukunuri35@gmail.com" "High Usage Alert On Disk Storage" "Disk Usage" "$MESSAGE" "$IP_ADDRESS" "DevOps Team"
