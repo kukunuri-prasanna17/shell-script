@@ -1,13 +1,14 @@
+#!/bin/bash
 RAM_USAGE=$(free | awk '{print $3}' | grep -v used | grep -v free)
 PARTITION=$( free | awk '{print $1}' | grep -v total)
-IP_ADDRESS=$(curl  http://169.254.169.254/latest/meta-data/public-ipv4)
+IP_ADDRESS=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 MESSAGE=" "
 RAM_THRESHOLD=20000
 
 while IFS= read -r line
 do
  if [ $line -ge $RAM_THRESHOLD ]; then
- MESSAGE="High $RAM_USAGE on: $PARTITION /n <br>"
+ MESSAGE="High $PARITION: $RAM_USAGE <br>"
  fi
 done <<< $RAM_USAGE
 
