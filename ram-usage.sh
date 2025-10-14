@@ -1,16 +1,18 @@
 #!/bin/bash
 RAM_USAGE=$(free | awk '/Mem:/ {print $3}')
 PARTITION=$(free | awk '/Mem:/ {print $2}')
-IP_ADDRESS=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
+IP_ADDRESS=$(curl -e http://169.254.169.254/latest/meta-data/public-ipv4)
 MESSAGE=" "
-MESSAGE="High Usage On $PARITION: $RAM_USAGE \n"
+MESSAGE="High Usage On $PARTITION: $RAM_USAGE"
 RAM_THRESHOLD=20000
 
 if [ $RAM_USAGE -ge $RAM_THRESHOLD ]; then
    echo "Message body: $MESSAGE"
+sh gmail.sh "prasannakukunuri35@gmail.com" "High Alret Usage" "High Usage on RAM" "$MESSAGE" "$IP_ADDRESS" "DevOps Team,"
+  else
+   echo "RAM Storage is normal condition"
 fi
 
-sh gmail.sh "prasannakukunuri35@gmail.com" "High Alret Usage" "High Usage on RAM" "$MESSAGE" "$IP_ADDRESS" "DevOps Team,"
 
 # TO_ADDRESS=$1
 # SUBJECT=$2
