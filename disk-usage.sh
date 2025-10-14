@@ -17,4 +17,4 @@ done <<< "$DISK_USAGE"
 echo -e "Message body: $MESSAGE"
 
 # Call the email script
-sh gmail.sh "prasannakukunuri35@gmail.com" "High Usage Alert On Disk Storage" "Disk Usage" "$MESSAGE" "$IP_ADDRESS" "DevOps Team"
+sh gmail.sh "prasannakukunuri35@gmail.com" "High Usage Alert On Disk Storage" "Disk Usage" "$MESSAGE" "${IP_ADDRESS}" "DevOps Team"
