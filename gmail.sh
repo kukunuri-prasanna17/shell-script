@@ -10,10 +10,11 @@ IP_ADDRESS=$5
 TO_TEAM=$6
 
 # Prepare final HTML email body from template
-FINAL_BODY=$(sed -e "s/TO_TEAM/$TO_TEAM/g" \
-                 -e "s/ALERT_TYPE/$ALERT_TYPE/g" \
-                 -e "s/IP-ADDRESS/$IP_ADDRESS/g" \
-                 -e "s/MESSAGE/$FORMATTED_BODY/g" template.html)
+FINAL_BODY=$(sed -e "s|TO_TEAM|$TO_TEAM|g" \
+                 -e "s|ALERT_TYPE|$ALERT_TYPE|g" \
+                 -e "s|IP-ADDRESS|$IP_ADDRESS|g" \
+                 -e "s|MESSAGE|$FORMATTED_BODY|g" template.html)
+
 
 # Send email using msmtp
 {
