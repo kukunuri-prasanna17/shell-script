@@ -5,12 +5,9 @@ IP_ADDRESS=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 MESSAGE=" "
 RAM_THRESHOLD=20000
 
-while IFS= read -r line
-do
- if [ $line -ge $RAM_THRESHOLD ]; then
- MESSAGE="High $PARITION: $RAM_USAGE <br>"
- fi
-done <<< $RAM_USAGE
+if [ $RAM_USAGE -ge $RAM_THRESHOLD ]; then
+ MESSAGE="High Usage On $PARITION: $RAM_USAGE <br>"
+fi
 
 echo -e "Message body: $MESSAGE"
 
