@@ -1,0 +1,23 @@
+RAM_USAGE=$(free | awk '{print $3}' | grep -v used | grep -v free)
+PARTITION=$( free | awk '{print $1}' | grep -v total)
+IP_ADDRESS=$(curl  http://169.254.169.254/latest/meta-data/public-ipv4)
+MESSAGE=" "
+RAM_THRESHOLD=20000
+
+while IFS= read -r line
+do
+ if [ $line -ge $RAM_THRESHOLD ]; then
+ MESSAGE="High $RAM_USAGE on: $PARTITION /n <br>"
+ fi
+done <<< $RAM_USAGE
+
+echo -e "Message body: $MESSAGE"
+
+sh gmail.sh "prasannakukunuri35@gmail.com" "High Alret Usage" "High Usage on RAM" "$MESSAGE" "$IP_ADDRESS" "DevOps Team,"
+
+# TO_ADDRESS=$1
+# SUBJECT=$2
+# ALERT_TYPE=$3
+# MESSAGE_BODY=$4
+# IP_ADDRESS=$5
+# TO_TEAM=$6
