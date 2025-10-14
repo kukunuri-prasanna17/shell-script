@@ -3,13 +3,12 @@ RAM_USAGE=$(free | awk '{print $3}' | grep -v used | grep -v free)
 PARTITION=$( free | awk '{print $1}' | grep -v total)
 IP_ADDRESS=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 MESSAGE=" "
+MESSAGE="High Usage On $PARITION: $RAM_USAGE \n"
 RAM_THRESHOLD=20000
 
 if [ $RAM_USAGE -ge $RAM_THRESHOLD ]; then
- MESSAGE="High Usage On $PARITION: $RAM_USAGE <br>"
+   echo -e "Message body: $MESSAGE"
 fi
-
-echo -e "Message body: $MESSAGE"
 
 sh gmail.sh "prasannakukunuri35@gmail.com" "High Alret Usage" "High Usage on RAM" "$MESSAGE" "$IP_ADDRESS" "DevOps Team,"
 
