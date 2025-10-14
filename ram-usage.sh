@@ -1,7 +1,7 @@
 #!/bin/bash
-RAM_USAGE=$(free | awk '/Mem:/ {print $3}')
-PARTITION=$(free | awk '/Mem:/ {print $2}')
-IP_ADDRESS=$(curl -e http://169.254.169.254/latest/meta-data/public-ipv4)
+RAM_USAGE=$(free | awk '{print $3}' | grep -v used | grep -v free)
+PARTITION=$(free | awk '{print $1}' | grep -v total)
+IP_ADDRESS=$(curl  http://169.254.169.254/latest/meta-data/public-ipv4)
 MESSAGE=" "
 MESSAGE="High Usage On $PARTITION: $RAM_USAGE"
 RAM_THRESHOLD=20000
