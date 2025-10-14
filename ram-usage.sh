@@ -17,7 +17,7 @@ if [ "$RAM_USAGE" -ge "$RAM_THRESHOLD" ]; then
   "High RAM Usage Alert" \
   "RAM Usage" \
   "$MESSAGE" \
-  "${IP_ADDRESS}" \
+  "$IP_ADDRESS" \
   "DevOps Team"
 else
   echo "RAM usage is normal: ${RAM_USAGE} KB"
