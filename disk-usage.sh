@@ -1,4 +1,6 @@
 #!/bin/bash
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 DISK_THRESHOLD=2
 DISK_USAGE=$(df -hT | grep -v Filesystem)
 IP_ADDRESS=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
