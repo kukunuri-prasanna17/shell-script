@@ -1,16 +1,18 @@
 #!/bin/bash
 # /usr/bin/my_html_viewer
 
-# Use correct Linux path — backslashes (\) don’t work in bash
 MY_HTML_FILE="/home/ec2-user/shell-script/template.html"
-#TEMPLATE_PATH="/home/ec2-user/bin/template.html"
 
-
-# Check if file exists (space is required before closing bracket)
 if [ ! -f "$MY_HTML_FILE" ]; then
-   echo "The file $MY_HTML_FILE doesn't exist."
-   exit 1
+    echo "Error: $MY_HTML_FILE not found"
+    exit 1
 fi
+
+FINAL_BODY=$(sed -e "s/TO_TEAM/$TO_TEAM/g" \
+                 -e "s/ALERT_TYPE/$ALERT_TYPE/g" \
+                 -e "s/IP-ADDRESS/$IP_ADDRESS/g" \
+                 -e "s/MESSAGE/$FORMATTED_BODY/g" "$MY_HTML_FILE")
+
 
 # Install w3m (if not already installed)
 sudo yum install -y w3m  >/dev/null 2>&1   # Use apt for Ubuntu, yum for Amazon Linux
