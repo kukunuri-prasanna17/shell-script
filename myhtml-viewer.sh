@@ -3,6 +3,8 @@
 
 # Use correct Linux path — backslashes (\) don’t work in bash
 MY_HTML_FILE="/home/ec2-user/shell-script/template.html"
+#TEMPLATE_PATH="/home/ec2-user/bin/template.html"
+
 
 # Check if file exists (space is required before closing bracket)
 if [ ! -f "$MY_HTML_FILE" ]; then

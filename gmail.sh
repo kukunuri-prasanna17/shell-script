@@ -12,6 +12,7 @@ TO_TEAM=$6
 # Prepare final HTML email body from template
 TEMPLATE_PATH="/home/ec2-user/shell-script/template.html"
 
+
 if [ ! -f "$TEMPLATE_PATH" ]; then
   echo "Error: HTML template not found at $TEMPLATE_PATH"
   exit 1
