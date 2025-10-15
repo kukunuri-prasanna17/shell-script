@@ -21,7 +21,7 @@ fi
 FINAL_BODY=$(sed -e "s/TO_TEAM/$TO_TEAM/g" \
                  -e "s/ALERT_TYPE/$ALERT_TYPE/g" \
                  -e "s/IP-ADDRESS/$IP_ADDRESS/g" \
-                 -e "s/MESSAGE/$FORMATTED_BODY/g" "$TEMPLATE_PATH")
+                 -e "s/MESSAGE/$FORMATTED_BODY/g" "$MY_HTML_FILE")
 
 
 
