@@ -8,7 +8,7 @@ MESSAGE=""
 TO_ADDRESS="prasannakukunuri35@gmail.com"
 
 if [ "$RAM_USAGE" -ge "$RAM_THRESHOLD" ]; then
-  MESSAGE="High RAM Usage Alert! <br> Used RAM: ${RAM_USAGE} KB <br> After Using, Available RAM: ${AVAIL_RAM} <br> Total RAM: ${TOTAL_RAM} <br>"
+  MESSAGE="High RAM Usage Alert! <br> Used RAM: ${RAM_USAGE} KB <br> After Using, Available RAM: ${AVAIL_RAM} KB <br> Total RAM: ${TOTAL_RAM} KB <br>"
 
   echo "Message body: $MESSAGE"
 

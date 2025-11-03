@@ -1,27 +1,29 @@
 #!/bin/bash
 
-# Function to calculate CPU usage
-calculate_cpu_usage() {
-    # Capture the first snapshot of CPU stats
-    CPU1=$(grep 'cpu ' /proc/stat | awk '{print $2+$3+$4+$5+$6+$7+$8}')
-    IDLE1=$(grep 'cpu ' /proc/stat | awk '{print $5}')
+# Get first snapshot of CPU stats
+CPU1=$(grep 'cpu ' /proc/stat | awk '{used=$2+$3+$4; idle=$5; print used, idle}')
+USED1=$(echo $CPU1 | awk '{print $1}')
+IDLE1=$(echo $CPU1 | awk '{print $2}')
 
-    # Wait for a second
-    sleep 1
+# Wait 1 second
+sleep 1
+''
+# Get second snapshot
+CPU2=$(grep 'cpu ' /proc/stat | awk '{used=$2+$3+$4; idle=$5; print used, idle}')
+USED2=$(echo $CPU2 | awk '{print $1}')
+IDLE2=$(echo $CPU2 | awk '{print $2}')
 
-    # Capture the second snapshot of CPU stats
-    CPU2=$(grep 'cpu ' /proc/stat | awk '{print $2+$3+$4+$5+$6+$7+$8}')
-    IDLE2=$(grep 'cpu ' /proc/stat | awk '{print $5}')
+# Calculate CPU usage
+USED_DIFF=$((USED2 - USED1))
+IDLE_DIFF=$((IDLE2 - IDLE1))
+TOTAL=$((USED_DIFF + IDLE_DIFF))
 
-    # Calculate the differences
-    CPU_DIFF=$((CPU2 - CPU1))
-    IDLE_DIFF=$((IDLE2 - IDLE1))
 
-    # Calculate CPU usage percentage
-    CPU_USAGE=$((100 * (CPU_DIFF - IDLE_DIFF) / CPU_DIFF))
+CPU_USED=$(( 100 * USED_DIFF / TOTAL ))
+CPU_AVAILABLE=$((100 - CPU_USED))
 
-    echo "Current CPU Usage: $CPU_USAGE%"
-}
+echo "CPU Used: $CPU_USED %"
+echo "CPU Available: $CPU_AVAILABLE %"
 
-# Run the function
-calculate_cpu_usage
+# Call the email script
+sh gmail.sh "prasannakukunuri35@gmail.com" "High Usage Alert On Disk Storage" "Disk Usage" "$MESSAGE" "$IP_ADDRESS" "DevOps Team"

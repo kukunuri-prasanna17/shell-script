@@ -25,4 +25,3 @@ grep "specific_keyboard" extracted_text.txt
 
 echo "✅ Created w3m dump for HTML file and searched keyword successfully."
 
-
